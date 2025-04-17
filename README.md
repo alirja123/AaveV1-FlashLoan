@@ -151,8 +151,8 @@ Enter our Flash Loan’s contract address, which we found out where to obtain ea
 Head back to Remix. Under the deployed Flash Loan contract, there’s another “flashloan” text field. This field takes a contract address of the asset we want to use. In our case it’s the Sepolia Testnet’s DAI contract, which is ```0x82fb927676b53b6eE07904780c7be9b4B50dB80b```. With that field correctly filled in, you can now hit the “transact” button below.
 Upon clicking the button, MetaMask should pop up asking for approval of the transaction. Confirm the transaction and you should be greeted by a success message. In Remix’s terminal you should see all the transcation details, and there you will be able to find this transcation(txn)hash then copy the it again go to: https://sepolia.etherscan.io/ and then paste the txn hash in the search bar.
 ```⚠️Under “Tokens Transferred”, you should see three different transactions.⚠️```
-1. The first transaction highlights the transfer of 1 DAI from LendingPool to our contract.
-2. The second transaction indicates the payback of 1 DAI along with the fees back to the lending pool.
+1. The first transaction highlights the transfer of 10 DAI from LendingPool to our contract.
+2. The second transaction indicates the payback of 10 DAI along with the fees back to the lending pool.
 3. The third transaction shows interest generated DAI which has its separate utility.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
