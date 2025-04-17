@@ -1,28 +1,22 @@
 # FlashLoan using Aave lendng pool   
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  
-```
-@Dev/Author: Pavan Ananth Sharma        
-``` 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 >What is a Flashloan?  
 
-Flash loan attacks refer to a smart contract exploit where an attacker takes out a flash loan from a DeFi protocol, uses the capital that they've borrowed, and pays it back in the same transaction.
-  
+A **FlashLoan** is a type of uncollateralized loan in decentralized finance (DeFi) that allows users to borrow assets instantly, but only within the same transaction. The borrowed amount must be returned, along with a small fee, before the transaction ends. If not, the entire transaction is reverted. FlashLoans are often used for arbitrage, collateral swaps, or liquidations.
  
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 >Why Flashloans? 
 
-Some traders have successfully employed flash loans to speculate on new coins, without having to risk their own funds. And, because flash loans bundle several smart contract transactions into one, they can reduce transaction fees (which can add up to quite a bit).
+FlashLoans enable users to access large amounts of capital without collateral, allowing for innovative DeFi strategies like arbitrage, refinancing, or liquidations. They minimize risk for lenders since the loan must be repaid within the same transaction, ensuring funds are only temporarily used. This makes them a powerful tool for maximizing efficiency and profit in decentralized finance.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 >Flashloan starts here: 
 
-This contains all the code to execute a successful flashloan on the Kovan test-net of Ethereum. Flashloan will be taken from the aave lending pool where will will take 1 DAI as a flashloan. Please do note that all the names of the files should not be changed and make sure you have got the Kovan test ethere, do not worry if you do not have, will be providing a link down and showing you  how to perform flashloan step by step.
+This contains all the code to execute a successful flashloan on the Sepolia test-net of Ethereum. Flashloan will be taken from the aave lending pool where we will take 10 DAI as a flashloan. Please do note that all the names of the files should not be changed and make sure you have got the Sepolia test ethere, do not worry if you do not have, will be providing a link down and showing you how to perform flashloan step by step.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 >Please follow along:
@@ -90,7 +84,7 @@ In our case the Flash Loan contract is using an abstract contract called FlashLo
 14. We don't have any need of data for the flash loan, so we are passing an empty string.
 15. We are defining the number of DAI(in terms of wei which is 10^18) we want to loan.
 16. We initialize the LendingPool interface which is ILendingPoolV1 provided by Aave so that we can call the flashLoan function.
-17. Finally, we call our flashLoan function. The function takes 4 main parameters. First we pass the address which will receive the loan. In our case, it's our own contract. Second, we pass the address of the asset. In our case, it's the address of DAI in the Kovan network. Third, we pass the amount of assets, and in our case it's 1 “ether” amount of units(or 10^18 in “wei” units). Last but not least, we pass the data value which in our case is an empty string.
+17. Finally, we call our flashLoan function. The function takes 4 main parameters. First we pass the address which will receive the loan. In our case, it's our own contract. Second, we pass the address of the asset. In our case, it's the address of DAI in the sepolia network. Third, we pass the amount of assets, and in our case it's 10 “ether” amount of units(or 10^18 in “wei” units). Last but not least, we pass the data value which in our case is an empty string.
 24-31 Next, we define the second function which is executeOperation. It’s where we utilize the flash loan. It’s called internally after the flashLoan function is successfully executed. It takes 4 main parameter which are -
         1. The address of reserve to which we will have to pay back the loan.
         2. The amount of asset
@@ -105,14 +99,13 @@ In our case the Flash Loan contract is using an abstract contract called FlashLo
 
 >Step4: Deploying The Contract
  
-First, open your MetaMask and set your network to "Kovan Test Network".
-Make sure you have kovan test ether to run the following transcation, please note this is Kovan test ether is to pay the gas fees for the flashloan.
-Get kovan test here if you do not have any test ether
+First, open your MetaMask and set your network to "Sepolia Test Network".
+Make sure you have sepolia test ether to run the following transcation, please note this is Sepolia test ether is to pay the gas fees for the flashloan.
+Get sepolia test here if you do not have any test ether
 ```[NOTE: DO NOT OVERLOAD YOUR WALLET WITH TEST ETHER PLEASE]```
-```KOVAN TEST ETHER LINK: https://faucets.chain.link/kovan```
-     ``` 1. Enter your account addrss.
-      2. Select 0.1 test ETH and then check the confirmations.
-      3. Wait for a few seconds and test ETH will be sent to the address what you had put.```
+```SEPOLIA TEST ETHER LINK: [https://cloud.google.com/application/web3/faucet/ethereum/sepolia]```
+     ``` 1. Select Network Ethereum Sepolia and add your wallet Address.
+      2. Click on recieve tokens and then Wait for a few seconds and test ETH will be sent to the wallet address.```
       
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -143,20 +136,20 @@ Make sure the “CONTRACT” field is set to FlashLoan.sol. Provide the address 
 Under the new “Deployed Contracts” tab, you will be able to copy the deployed contract's address. We will come back to this step later; in the meantime we need to add some DAI to our Flash Loan contract. This is because Flash Loans need funds in the contract to successfully execute.
 ```⚠️For that, you can jump to this link to get some DAI tokens: https://testnet.aave.com/faucet/DAI ⚠️.```
 Be sure to connect to the “Aave v2 Market” with a little “K” in the top right corner. Click on the faucet, paste in your MetaMask wallet address, and wait for confirmation.
-After obtaining confirmation, we are going to add the DAI token to MetaMask. For that, open your MetaMask. Click on “Add Token” at the bottom. In the “Token Contract Address” field enter ```0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD```. This is the contract address for DAI in Kovan. After clicking “Next”, It should display the DAI you got from the faucet earlier.
-```DAI Token Contract Address = 0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD```
+After obtaining confirmation, we are going to add the DAI token to MetaMask. For that, open your MetaMask. Click on “Add Token” at the bottom. In the “Token Contract Address” field enter ```0x82fb927676b53b6eE07904780c7be9b4B50dB80b```. This is the contract address for DAI in Sepolia. After clicking “Next”, It should display the DAI you got from the faucet earlier.
+```DAI Token Contract Address = 0x82fb927676b53b6eE07904780c7be9b4B50dB80b```
 
 Next up, click on the DAI token. Click on “Send” and it should open a window
 Enter our Flash Loan’s contract address, which we found out where to obtain earlier. Enter the amount which we want to send. In our case, we will send 10 DAI. Then click on "Next". Click on "Confirm"! You have now successfully given your Flash Loan contract 10 DAI.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
->⚠️ If you dont know how to find the contract address, go to: https://kovan.etherscan.io/  and search your txn hash there you can find your contract address⚠️.
+>⚠️ If you dont know how to find the contract address, go to: https://sepolia.etherscan.io/  and search your txn hash there you can find your contract address⚠️.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 >Step7: Executing The Flash Loan
 
-Head back to Remix. Under the deployed Flash Loan contract, there’s another “flashloan” text field. This field takes a contract address of the asset we want to use. In our case it’s the Kovan Testnet’s DAI contract, which is ```0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD```. With that field correctly filled in, you can now hit the “transact” button below.
-Upon clicking the button, MetaMask should pop up asking for approval of the transaction. Confirm the transaction and you should be greeted by a success message. In Remix’s terminal you should see all the transcation details, and there you will be able to find this transcation(txn)hash then copy the it again go to: https://kovan.etherscan.io/ and then paste the txn hash in the search bar.
+Head back to Remix. Under the deployed Flash Loan contract, there’s another “flashloan” text field. This field takes a contract address of the asset we want to use. In our case it’s the Sepolia Testnet’s DAI contract, which is ```0x82fb927676b53b6eE07904780c7be9b4B50dB80b```. With that field correctly filled in, you can now hit the “transact” button below.
+Upon clicking the button, MetaMask should pop up asking for approval of the transaction. Confirm the transaction and you should be greeted by a success message. In Remix’s terminal you should see all the transcation details, and there you will be able to find this transcation(txn)hash then copy the it again go to: https://sepolia.etherscan.io/ and then paste the txn hash in the search bar.
 ```⚠️Under “Tokens Transferred”, you should see three different transactions.⚠️```
 1. The first transaction highlights the transfer of 1 DAI from LendingPool to our contract.
 2. The second transaction indicates the payback of 1 DAI along with the fees back to the lending pool.
@@ -167,13 +160,10 @@ Upon clicking the button, MetaMask should pop up asking for approval of the tran
 We were successfully able to write the smart contract for a Flash Loan! We were able to borrow DAI from the pool, pay the Flash Loan fee, and then repay the borrowed amount all in a single transaction. You just borrowed money with no collateral!
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-```If you enjoyed this full tutorial do consider following me on github as well as on my instagram!!```
+```If you enjoyed this full tutorial do consider following me on github.```
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-> 0x592eF244F8924be9F3F8803f8d639392f465Ac51
-
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  
 
